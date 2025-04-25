@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard</title>
+</head>
+<body class="container mt-5">
+    <h1>Welcome, Admin!</h1>
+    <h2>Welcome to Admin Dashboard</h2>
+    <a th:href="@{/products}">Manage Products</a>
+    <a th:href="@{/customers}">Manage Customers</a>
+    <a th:href="@{/invoices}">Manage Invoices</a>
+    <a href="/logout">Logout</a>
+</body>
+</html>
