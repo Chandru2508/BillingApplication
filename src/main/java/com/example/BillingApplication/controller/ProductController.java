@@ -2,7 +2,6 @@ package com.example.BillingApplication.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.BillingApplication.model.Product;
-import com.example.BillingApplication.repository.ProductRepository;
 import com.example.BillingApplication.service.ProductService;
 
 @Controller
@@ -22,8 +20,8 @@ public class ProductController {
 
     private final ProductService service;
     
-    @Autowired
-    private ProductRepository repo;
+    // @Autowired
+    // private ProductRepository repo;
 
     public ProductController(ProductService service) {
         this.service = service;

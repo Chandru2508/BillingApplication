@@ -3,7 +3,6 @@ package com.example.BillingApplication.model;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,6 +34,8 @@ public class InvoiceItem {
 	public Long getId() {
 		return id;
 	}
+
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -73,6 +74,16 @@ public class InvoiceItem {
 	}
 	public void setTotal(double total) {
 		this.total = total;
+	}
+
+
+	public Long getProductId() {
+		return productId;
+	}
+
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}
 
     // Getters and Setters
