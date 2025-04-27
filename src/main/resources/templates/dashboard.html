@@ -40,7 +40,11 @@
       .main {
         flex: 1;
         padding: 30px;
-        background: #ecf0f1;
+        background: linear-gradient(
+          135deg,
+          rgba(241, 228, 201, 0.9),
+          rgba(195, 185, 157, 0.9)
+        );
       }
       /* Input Styles */
       .form-control {
@@ -113,70 +117,72 @@
           </select>
         </div>
 
-        <div class="row product-row mb-2">
-          <div class="col-md-3">
-            <label>Product</label>
-            <select
-              class="form-control product-select"
-              name="items[0].product.productId"
-              required
-            >
-              <option value="0" disabled selected>Select Product</option>
-              <th:block th:each="prod : ${products}">
-                <option
-                  th:value="${prod.productId}"
-                  th:data-price="${prod.unitPrice}"
-                  th:data-tax="${prod.taxPercent}"
-                  th:text="${prod.productName}"
-                ></option>
-              </th:block>
-            </select>
-          </div>
-          <div class="col-md-2">
-            <label>Qty</label>
-            <input
-              type="number"
-              class="form-control quantity"
-              name="items[0].quantity"
-              min="1"
-              placeholder="Enter quantity"
-              required
-            />
-          </div>
-          <div class="col-md-2">
-            <label>Price</label>
-            <input
-              type="text"
-              class="form-control price"
-              name="items[0].price"
-              readonly
-              placeholder="Price"
-            />
-          </div>
-          <div class="col-md-2">
-            <label>Tax (%)</label>
-            <input
-              type="text"
-              class="form-control tax"
-              name="items[0].tax"
-              readonly
-              placeholder="Tax %"
-            />
-          </div>
-          <div class="col-md-2">
-            <label>Total</label>
-            <input
-              type="text"
-              class="form-control total"
-              name="items[0].total"
-              readonly
-              placeholder="Total"
-            />
-          </div>
-          <div class="col-md-1 d-flex align-items-end">
-            <button type="button" class="btn btn-danger remove-row">
-              Remove
-            </button>
+        <div id="productRows">
+          <div class="row product-row mb-2">
+            <div class="col-md-3">
+              <label>Product</label>
+              <select
+                class="form-control product-select"
+                name="items[0].product.productId"
+                required
+              >
+                <option value="0" disabled selected>Select Product</option>
+                <th:block th:each="prod : ${products}">
+                  <option
+                    th:value="${prod.productId}"
+                    th:data-price="${prod.unitPrice}"
+                    th:data-tax="${prod.taxPercent}"
+                    th:text="${prod.productName}"
+                  ></option>
+                </th:block>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label>Qty</label>
+              <input
+                type="number"
+                class="form-control quantity"
+                name="items[0].quantity"
+                min="1"
+                placeholder="Enter quantity"
+                required
+              />
+            </div>
+            <div class="col-md-2">
+              <label>Price</label>
+              <input
+                type="text"
+                class="form-control price"
+                name="items[0].price"
+                readonly
+                placeholder="Price"
+              />
+            </div>
+            <div class="col-md-2">
+              <label>Tax (%)</label>
+              <input
+                type="text"
+                class="form-control tax"
+                name="items[0].tax"
+                readonly
+                placeholder="Tax %"
+              />
+            </div>
+            <div class="col-md-2">
+              <label>Total</label>
+              <input
+                type="text"
+                class="form-control total"
+                name="items[0].total"
+                readonly
+                placeholder="Total"
+              />
+            </div>
+            <div class="col-md-1 d-flex align-items-end">
+              <button type="button" class="btn btn-danger remove-row">
+                Remove
+              </button>
+            </div>
           </div>
         </div>
 
@@ -205,7 +211,8 @@
         const productContainer = document.getElementById("productRows");
         const addRowBtn = document.getElementById("addRowBtn");
         const invoiceTotal = document.getElementById("invoiceTotal");
-        let rowIndex = 1; // Start from second row since first is already present
+
+        let rowIndex = 1; // Start from second row since the first is already present
 
         function updateTotal() {
           let grandTotal = 0;
@@ -254,7 +261,7 @@
           newRow
             .querySelectorAll("input")
             .forEach((input) => (input.value = ""));
-          newRow.querySelector("select").value = 0;
+          newRow.querySelector("select").value = 0; // Reset select to the first option
           newRow
             .querySelector("select")
             .setAttribute("name", `items[${rowIndex}].product.productId`);

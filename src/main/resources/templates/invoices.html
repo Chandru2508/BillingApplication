@@ -13,10 +13,71 @@
           rgba(241, 228, 201, 0.9),
           rgba(195, 185, 157, 0.9)
         );
+        display: flex;
+        margin: 0;
+      }
+
+      .sidebar {
+        height: 100vh; /* Full height */
+        position: fixed; /* Fixed position */
+        top: 0; /* Stick to the top */
+        left: 0; /* Stick to the left */
+        background-color: #343a40; /* Dark background for sidebar */
+        padding: 20px; /* Padding for the sidebar */
+        color: white; /* Text color in sidebar */
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Sidebar shadow */
+        z-index: 1000; /* Ensure sidebar is above other content */
+        width: 230px;
+      }
+
+      .sidebar a {
+        color: white; /* Sidebar link color */
+        text-decoration: none; /* No underline */
+      }
+
+      .sidebar a:hover {
+        text-decoration: underline; /* Underline on hover */
+        color: #ffc107; /* Change color on hover */
+      }
+
+      .container {
+        margin-left: 250px; /* Offset for the sidebar */
+        padding: 20px; /* Add some padding to the container */
+        width: 100%;
+      }
+
+      .table {
+        margin-bottom: 0; /* Remove bottom margin */
       }
     </style>
   </head>
   <body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+      <h3>Cheran Billing</h3>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/customers">View Customers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/products">View Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/invoices">View Invoices</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/customers/add">Add Customer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/products/add">Add Product</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Main Content Area -->
     <div class="container mt-4">
       <h2>Invoices</h2>
 
@@ -91,5 +152,7 @@
         </tbody>
       </table>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
