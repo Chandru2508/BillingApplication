@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Login - Cheran Billing Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: linear-gradient(
+          135deg,
+          rgba(241, 228, 201, 0.9),
+          rgba(195, 185, 157, 0.9)
+        );
+        min-height: 100vh;
+        font-family: "Arial", sans-serif;
+        padding-bottom: 100px;
+      }
+      .hero-section {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        padding: 40px;
+        margin: 40px auto;
+        width: 90%;
+        max-width: 600px; /* Set a max width for the container */
+        display: flex;
+        align-items: center; /* Align items vertically center */
+      }
+      .login-form {
+        flex: 1; /* Allow the form to take available space */
+        padding-right: 20px; /* Spacing between image and form */
+      }
+      .login-image {
+        flex: 1; /* Allow the image to take available space */
+        max-width: 200px; /* Set a max width for the image */
+        border-radius: 10px; /* Rounding edges */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+      footer {
+        background-color: #343a40;
+        color: white;
+        padding: 20px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+      footer a {
+        color: #ffc107;
+        text-decoration: none;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
+      .btn-primary {
+        font-size: 1.4rem;
+        padding: 15px 30px;
+        background-color: #e26a2c;
+        color: rgb(250, 252, 249);
+        border-radius: 50px;
+        border: none;
+        transition: all 0.8s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .btn-primary:hover {
+        background: linear-gradient(to left, rgb(250, 252, 249), #dc7d57);
+        color: #d45826;
+        transform: scale(1.1);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+      <div class="container-fluid">
+        <span class="navbar-brand text-primary fw-bold">Cheran Billing</span>
+        <div class="dropdown ms-auto">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            &#x22EE;
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" th:href="@{/about}">About</a></li>
+            <li><a class="dropdown-item" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero-section container mt-5">
+      <div class="login-form">
+        <h2 class="text-primary text-center">Admin Login</h2>
+
+        <div th:if="${param.error}" class="alert alert-danger text-center">
+          Invalid username or password
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success text-center">
+          You have been logged out
+        </div>
+
+        <form th:action="@{/login}" method="post">
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+      </div>
+      <img
+        th:src="@{https://github.com/Chandru2508/EclipseTraining/blob/main/3d-rendering-cartoon-shopping-cart.jpg?raw=true        }"
+        class="login-image img-fluid rounded"
+        alt="Billing Application"
+      />
+    </section>
+
+    <footer id="contact">
+      <div class="container text-center">
+        <p class="mb-1">
+          &copy; 2025 Cheran Billing Application. All rights reserved.
+        </p>
+        <p>
+          📧
+          <a href="mailto:contact@cheranbilling.com"
+            >contact@cheranbilling.com</a
+          >
+          | 📞 +91-98765-43210 | 📸
+          <a href="https://instagram.com/cheranbilling" target="_blank"
+            >@cheranbilling</a
+          >
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
