@@ -1,3 +1,12 @@
+# 1. Build stage
+FROM maven:3.9.5-eclipse-temurin-21 AS build
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
+
+# 2. Run stage
+
+
 # 1. Use official Java runtime
 FROM openjdk:21-jdk-slim
 
