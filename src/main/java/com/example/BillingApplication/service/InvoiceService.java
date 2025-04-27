@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.BillingApplication.model.Invoice;
-import com.example.BillingApplication.model.Product;
 import com.example.BillingApplication.repository.InvoiceRepository;
-import com.example.BillingApplication.repository.ProductRepository;
 
 @Service
 public class InvoiceService {
@@ -18,13 +16,14 @@ public class InvoiceService {
     @Autowired
     private InvoiceRepository invoiceRepo;
     
-    @Autowired
-    private ProductRepository productRepo;
+    // @Autowired
+    // private ProductRepository productRepo;
     
-    @Autowired
-    private InvoiceItemService invoiceItemService;
+    // @Autowired
+    // private InvoiceItemService invoiceItemService;
     
-    private Product product;
+    // @Autowired
+    // private Product product;
 
     @Transactional
     public void saveInvoiceWithItems(Invoice invoice) {

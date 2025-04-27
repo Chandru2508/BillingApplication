@@ -1,56 +1,138 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Product List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <script th:src="@{/products.js}"></script>
-</head>
-<body>
-<div class="container mt-4">
-    <h2 class="mb-4">Product List</h2>
-    <a href="/products/add" class="btn btn-primary mb-3">Add New Product</a>
-    
-    <form th:action="@{/products}" method="get" class="mb-3 d-flex">
-	    <input type="text" name="keyword" class="form-control me-2" th:value="${keyword}" placeholder="Search by ID or Name" required>
-	    <button type="submit" class="btn btn-outline-primary">Search</button>
-	</form>
+    <style>
+      body {
+        background-color: #fdf9e5; /* Background color */
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+      }
+      .sidebar {
+        height: 100vh; /* Full height */
+        position: fixed; /* Fixed position */
+        top: 0; /* Stick to the top */
+        left: 0; /* Stick to the left */
+        background-color: #343a40; /* Dark background for sidebar */
+        padding: 20px; /* Padding for the sidebar */
+        color: white; /* Text color in sidebar */
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Sidebar shadow */
+        z-index: 1000; /* Ensure sidebar is above other content */
+      }
+      .sidebar a {
+        color: white; /* Sidebar link color */
+        text-decoration: none; /* No underline */
+      }
+      .sidebar a:hover {
+        text-decoration: underline; /* Underline on hover */
+        color: #ffc107; /* Change color on hover */
+      }
+      .container {
+        margin-left: 230px; /* Offset for the sidebar */
+        padding: 20px; /* Add some padding to the container */
+      }
+      .table {
+        margin-bottom: 0; /* Remove bottom margin */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+      <h2>Cheran Billing</h2>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/customers">View Customers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/products">View Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/invoices">View Invoices</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/customers/add">Add Customer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/products/add">Add Product</a>
+        </li>
+      </ul>
+    </div>
 
-<!--     <div th:if="${error}" class="alert alert-danger" role="alert"> -->
-<!--         <span th:text="${error}"></span> -->
-<!--     </div> -->
-    <table class="table table-bordered table-hover">
+    <!-- Main Content Area -->
+    <div class="container mt-4">
+      <h2 class="mb-4">Product List</h2>
+      <a href="/products/add" class="btn btn-primary mb-3">Add New Product</a>
+
+      <form th:action="@{/products}" method="get" class="mb-4 row">
+        <div class="col-auto">
+          <!-- Adjust the width with Bootstrap's spacing utility -->
+          <input
+            type="text"
+            name="keyword"
+            class="form-control"
+            th:value="${keyword}"
+            placeholder="Search by ID or Name"
+            required
+          />
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-outline-primary">Search</button>
+        </div>
+      </form>
+
+      <div th:if="${error}" class="alert alert-danger" role="alert">
+        <span th:text="${error}"></span>
+      </div>
+      <table class="table table-bordered table-hover">
         <thead class="table-dark">
-            <tr>
-                <th>#</th>
-                <th>Product ID</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Price (₹)</th>
-                <th>Stock</th>
-                <th>Tax (%)</th>
-                <th>Description</th>
-                <th>Actions</th>
-            </tr>
+          <tr>
+            <th>#</th>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price (₹)</th>
+            <th>Stock</th>
+            <th>Tax (%)</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody>
-            <tr th:each="product, iterStat : ${products}">
-                <td th:text="${iterStat.count}">1</td>
-                <td th:text="${product.productId}">P001</td>
-                <td th:text="${product.productName}">Name</td>
-                <td th:text="${product.category}">Category</td>
-                <td th:text="${product.unitPrice}">100</td>
-                <td th:text="${product.quantityInStock}">50</td>
-                <td th:text="${product.taxPercent}">18</td>
-                <td th:text="${product.description}">Details</td>
-                <td>
-                    <a th:href="@{'/products/edit/' + ${product.productId}}" class="btn btn-sm btn-warning">Edit</a>
-                    <a th:href="@{'/products/delete/' + ${product.productId}}" 
-                       onclick="return confirm('Are you sure to delete?')" 
-                       class="btn btn-sm btn-danger">Delete</a>
-                </td>
-            </tr>
+          <tr th:each="product, iterStat : ${products}">
+            <td th:text="${iterStat.count}">1</td>
+            <td th:text="${product.productId}">P001</td>
+            <td th:text="${product.productName}">Name</td>
+            <td th:text="${product.category}">Category</td>
+            <td th:text="${product.unitPrice}">100</td>
+            <td th:text="${product.quantityInStock}">50</td>
+            <td th:text="${product.taxPercent}">18</td>
+            <td th:text="${product.description}">Details</td>
+            <td>
+              <a
+                th:href="@{'/products/edit/' + ${product.productId}}"
+                class="btn btn-sm btn-warning"
+                >Edit</a
+              >
+              <a
+                th:href="@{'/products/delete/' + ${product.productId}}"
+                onclick="return confirm('Are you sure to delete?')"
+                class="btn btn-sm btn-danger"
+                >Delete</a
+              >
+            </td>
+          </tr>
         </tbody>
-    </table>
-</div>
-</body>
+      </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>

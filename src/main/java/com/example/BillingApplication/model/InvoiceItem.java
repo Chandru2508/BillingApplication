@@ -17,14 +17,14 @@ public class InvoiceItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL) 
     @JoinColumn(name = "invoice_id")
     private Invoice invoice;
  
     @Transient // Not persisted, only used for binding form value
     private Long productId;
     
-    @ManyToOne(cascade = CascadeType.PERSIST)  
+    @ManyToOne(cascade = CascadeType.ALL)  
     @JoinColumn(name = "product_id")
     private Product product;
  

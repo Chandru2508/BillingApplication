@@ -22,10 +22,8 @@ import com.example.BillingApplication.model.Product;
 import com.example.BillingApplication.repository.CustomerRepository;
 import com.example.BillingApplication.repository.InvoiceRepository;
 import com.example.BillingApplication.repository.ProductRepository;
-import com.example.BillingApplication.service.CustomerService;
 import com.example.BillingApplication.service.InvoiceItemService;
 import com.example.BillingApplication.service.InvoiceService;
-import com.example.BillingApplication.service.ProductService;
 import com.example.BillingApplication.util.InvoicePdfGenerator;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,7 +35,7 @@ public class InvoiceController {
 
     @Autowired
     private InvoiceRepository invoiceRepo;
-
+ 
     @Autowired
     private CustomerRepository customerRepo;
 
@@ -47,11 +45,11 @@ public class InvoiceController {
     @Autowired
     private InvoiceService invoiceService;
     
-    @Autowired
-    private ProductService productService;
+    // @Autowired
+    // private ProductService productService;
     
-    @Autowired
-    private CustomerService customerService;
+    // @Autowired
+    // private CustomerService customerService;
     
     @Autowired
     private InvoiceItemService invoiceItemService;
@@ -106,7 +104,7 @@ public class InvoiceController {
         try {
             // Save Invoice
         	Invoice invoice = new Invoice();
-        	Long customerId = Long.parseLong(request.getParameter("customer.id"));
+        	Long customerId = Long.valueOf(request.getParameter("customer.id"));
         	Customer customer = customerRepo.findById(customerId).orElseThrow(() -> new RuntimeException("Customer not found"));
         	invoice.setCustomer(customer);
         	invoice.setDate(LocalDate.now());
@@ -120,7 +118,7 @@ public class InvoiceController {
         	    String productIdParam = request.getParameter("items[" + index + "].product.productId");
         	    if (productIdParam == null) break;
 
-        	    Long productId = Long.parseLong(productIdParam);
+        	    Long productId = Long.valueOf(productIdParam);
         	    int quantity = Integer.parseInt(request.getParameter("items[" + index + "].quantity"));
         	    double price = Double.parseDouble(request.getParameter("items[" + index + "].price"));
         	    double tax = Double.parseDouble(request.getParameter("items[" + index + "].tax"));
@@ -150,8 +148,7 @@ public class InvoiceController {
 
             return "redirect:/invoices";
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (NumberFormatException e) {
             model.addAttribute("error", e.getMessage());
             return "invoice_form";
         }

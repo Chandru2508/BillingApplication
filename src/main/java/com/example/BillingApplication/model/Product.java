@@ -14,9 +14,9 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id", nullable = false, unique = true)
-    private long productId;
+    private Long productId;
 
-    @Column(name = "product_name", nullable = false)
+    @Column(name = "product_name", nullable = false, unique = true)
     private String productName;
 
     @Column(nullable = false)
@@ -51,7 +51,7 @@ public class Product {
 
     // --- Getters & Setters ---
 
-    public long getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
