@@ -22,8 +22,8 @@
 //    public void run(String... args) throws Exception {
 //        if (adminRepository.count() == 0) {
 //            Admin admin = new Admin();
-//            admin.setUserName("admin");
-//            admin.setPassword(passwordEncoder.encode("admin123")); // Password will be stored securely
+//            admin.setUserName("cheranAdmin");
+//            admin.setPassword(passwordEncoder.encode("cheranAdmin005")); // Password will be stored securely
 //            adminRepository.save(admin);
 //            System.out.println("✅ Test Admin inserted: admin / admin123");
 //        } else {
