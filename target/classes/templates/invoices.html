@@ -123,7 +123,6 @@
             <th>Date</th>
             <th>Customer</th>
             <th>Total Amount (₹)</th>
-            <!-- <th>Actions</th> -->
           </tr>
         </thead>
         <tbody>
@@ -140,14 +139,7 @@
             </td>
             <td th:text="${invoice.customer.name}">Customer</td>
             <td th:text="${invoice.total}">0.00</td>
-            <!-- <td>
-              <a
-                th:href="@{'/invoices/delete/' + ${invoice.id}}"
-                onclick="return confirm('Delete this invoice?')"
-                class="btn btn-sm btn-danger"
-                >Delete</a
-              >
-            </td> -->
+            
           </tr>
         </tbody>
       </table>
